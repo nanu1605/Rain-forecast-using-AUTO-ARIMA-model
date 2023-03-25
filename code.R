@@ -1,0 +1,18 @@
+install.packages("forecast")
+install.packages("readxl")
+library(readxl)
+library(forecast)
+data<-read_xlsx('/Users/Divy/OneDrive/Documents/data.xlsx')
+tsdata<-ts(data$rainfall,start = c(2004,1),frequency = 12)
+plot(tsdata)
+autoarimal<-auto.arima(tsdata)
+forecast1<-forecast(autoarimal, h=24)
+forecast1
+'plot(forecast1)'
+plot(forecast1$residuals)
+qqnorm(forecast1$residuals)
+acf(forecast1$residuals)
+pacf(forecast1$residuals)
+summary(autoarimal) 
+accuracy(autoarimal)
+save()
